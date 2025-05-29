@@ -1,0 +1,34 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  adapter: postgresql
+  database: url_shortener_backend_development
+  encoding: unicode
+  host: 127.0.0.1
+  port: 5432
+  pool: 25
+  reaping_frequency: 10
+  username: healthwire
+  password: ahsan
+
+test:
+  <<: *default
+  database: url_shortener_backend_test
+  encoding: unicode
+  host: 127.0.0.1
+  port: 5432
+  pool: 25
+  reaping_frequency: 10
+  username: healthwire
+  password: ahsan
+
+production:
+  <<: *default
+  database: url_shortener_backend_production
+  username: url_shortener_backend
+  password: <%= ENV["URL_SHORTENER_BACKEND_DATABASE_PASSWORD"] %>
